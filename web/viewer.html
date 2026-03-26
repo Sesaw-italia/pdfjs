@@ -24,73 +24,16 @@ See https://github.com/adobe-type-tools/cmap-resources
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <!--#if GENERIC || CHROME-->
     <meta name="google" content="notranslate" />
-    <!--#endif-->
     <title>PDF.js viewer</title>
 
-    <!--#if MOZCENTRAL-->
-    <!--#include viewer-snippet-firefox-extension.html-->
-    <!--#elif CHROME-->
-    <!--#include viewer-snippet-chrome-extension.html-->
-    <!--#else-->
-    <!--#include viewer-snippet.html-->
-    <!--#endif-->
+<!-- This snippet is used in production (included from viewer.html) -->
+<link rel="resource" type="application/l10n" href="locale/locale.json" />
+<script src="../build/pdf.mjs" type="module"></script>
 
-    <!--#if MOZCENTRAL-->
-    <!--<link rel="stylesheet" href="resource://pdf.js/web/viewer.css">-->
-    <!--<link rel="localization" href="toolkit/pdfviewer/viewer.ftl"/>-->
-    <!--#else-->
     <link rel="stylesheet" href="viewer.css" />
-    <!--#endif-->
 
-    <!--#if MOZCENTRAL-->
-    <!--<script src="resource://pdf.js/web/viewer.mjs" type="module"></script>-->
-    <!--#elif !MOZCENTRAL-->
-    <!--<script src="viewer.mjs" type="module"></script>-->
-    <!--#elif /* Development mode. */-->
-    <link rel="resource" type="application/l10n" href="locale/locale.json" />
-
-    <script type="importmap">
-      {
-        "imports": {
-          "pdfjs/": "../src/",
-          "pdfjs-lib": "../src/pdf.js",
-          "pdfjs-web/": "./",
-
-          "fluent-bundle": "../node_modules/@fluent/bundle/esm/index.js",
-          "fluent-dom": "../node_modules/@fluent/dom/esm/index.js",
-          "cached-iterable": "../node_modules/cached-iterable/src/index.mjs",
-
-          "display-binary_data_factory": "../src/display/binary_data_factory.js",
-          "display-network_stream": "../src/display/network_stream.js",
-          "display-node_utils": "../src/display/stubs.js",
-
-          "web-alt_text_manager": "./alt_text_manager.js",
-          "web-annotation_editor_params": "./annotation_editor_params.js",
-          "web-download_manager": "./download_manager.js",
-          "web-external_services": "./genericcom.js",
-          "web-new_alt_text_manager": "./new_alt_text_manager.js",
-          "web-null_l10n": "./genericl10n.js",
-          "web-pdf_attachment_viewer": "./pdf_attachment_viewer.js",
-          "web-pdf_cursor_tools": "./pdf_cursor_tools.js",
-          "web-pdf_document_properties": "./pdf_document_properties.js",
-          "web-pdf_find_bar": "./pdf_find_bar.js",
-          "web-pdf_layer_viewer": "./pdf_layer_viewer.js",
-          "web-pdf_outline_viewer": "./pdf_outline_viewer.js",
-          "web-pdf_presentation_mode": "./pdf_presentation_mode.js",
-          "web-pdf_thumbnail_viewer": "./pdf_thumbnail_viewer.js",
-          "web-preferences": "./genericcom.js",
-          "web-print_service": "./pdf_print_service.js",
-          "web-secondary_toolbar": "./secondary_toolbar.js",
-          "web-signature_manager": "./signature_manager.js",
-          "web-toolbar": "./toolbar.js",
-          "web-views_manager": "./views_manager.js"
-        }
-      }
-    </script>
-    <script src="viewer.js" type="module"></script>
-    <!--#endif-->
+  <script src="viewer.mjs" type="module"></script>
   </head>
 
   <body tabindex="0">
@@ -122,7 +65,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                   aria-describedby="viewsManagerHeaderLabel"
                   data-l10n-id="pdfjs-views-manager-sidebar"
                 >
-                  <div id="viewsManagerHeader">
+                  <div id="viewsManagerHeader" role="heading" aria-level="2">
                     <div id="viewsManagerTitle">
                       <div id="viewsManagerSelector">
                         <button
@@ -138,21 +81,29 @@ See https://github.com/adobe-type-tools/cmap-resources
                           <span data-l10n-id="pdfjs-views-manager-view-selector-button-label"></span>
                         </button>
                         <menu id="viewsManagerSelectorOptions" role="listbox" class="popupMenu withMark">
-                          <button id="thumbnailsViewMenu" role="option" type="button" tabindex="-1">
-                            <span data-l10n-id="pdfjs-views-manager-pages-option-label"></span>
-                          </button>
-                          <button id="outlinesViewMenu" role="option" type="button" tabindex="-1">
-                            <span data-l10n-id="pdfjs-views-manager-outlines-option-label"></span>
-                          </button>
-                          <button id="attachmentsViewMenu" role="option" type="button" tabindex="-1">
-                            <span data-l10n-id="pdfjs-views-manager-attachments-option-label"></span>
-                          </button>
-                          <button id="layersViewMenu" role="option" type="button" tabindex="-1">
-                            <span data-l10n-id="pdfjs-views-manager-layers-option-label"></span>
-                          </button>
+                          <li>
+                            <button id="thumbnailsViewMenu" role="option" type="button" tabindex="-1">
+                              <span data-l10n-id="pdfjs-views-manager-pages-option-label"></span>
+                            </button>
+                          </li>
+                          <li>
+                            <button id="outlinesViewMenu" role="option" type="button" tabindex="-1">
+                              <span data-l10n-id="pdfjs-views-manager-outlines-option-label"></span>
+                            </button>
+                          </li>
+                          <li>
+                            <button id="attachmentsViewMenu" role="option" type="button" tabindex="-1">
+                              <span data-l10n-id="pdfjs-views-manager-attachments-option-label"></span>
+                            </button>
+                          </li>
+                          <li>
+                            <button id="layersViewMenu" role="option" type="button" tabindex="-1">
+                              <span data-l10n-id="pdfjs-views-manager-layers-option-label"></span>
+                            </button>
+                          </li>
                         </menu>
                       </div>
-                      <span id="viewsManagerHeaderLabel" class="viewsManagerLabel" role="heading" aria-level="2"></span>
+                      <span id="viewsManagerHeaderLabel" class="viewsManagerLabel"></span>
                       <button
                         id="viewsManagerAddFileButton"
                         class="toolbarButton viewsManagerButton"
@@ -176,22 +127,11 @@ See https://github.com/adobe-type-tools/cmap-resources
                     </div>
                     <div id="viewsManagerStatus">
                       <div id="viewsManagerStatusAction">
-                        <span id="viewsManagerStatusActionLabelContainer" class="viewsManagerStatusLabel">
-                          <button
-                            id="viewsManagerStatusActionDeselectButton"
-                            class="hidden"
-                            type="button"
-                            tabindex="0"
-                            role="checkbox"
-                            aria-checked="true"
-                            aria-labelledby="viewsManagerStatusActionLabel"
-                          ></button>
-                          <span
-                            id="viewsManagerStatusActionLabel"
-                            class="viewsManagerStatusLabel"
-                            data-l10n-id="pdfjs-views-manager-pages-status-none-action-label"
-                          ></span>
-                        </span>
+                        <span
+                          id="viewsManagerStatusActionLabel"
+                          class="viewsManagerStatusLabel"
+                          data-l10n-id="pdfjs-views-manager-pages-status-none-action-label"
+                        ></span>
                         <div id="actionSelector">
                           <button
                             id="viewsManagerStatusActionButton"
@@ -205,23 +145,31 @@ See https://github.com/adobe-type-tools/cmap-resources
                             <span data-l10n-id="pdfjs-views-manager-pages-status-action-button-label"></span>
                           </button>
                           <menu id="viewsManagerStatusActionOptions" class="popupMenu">
-                            <button id="viewsManagerStatusActionCopy" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
-                              <span data-l10n-id="pdfjs-views-manager-pages-status-copy-button-label"></span>
-                            </button>
-                            <button id="viewsManagerStatusActionCut" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
-                              <span data-l10n-id="pdfjs-views-manager-pages-status-cut-button-label"></span>
-                            </button>
-                            <button id="viewsManagerStatusActionDelete" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
-                              <span data-l10n-id="pdfjs-views-manager-pages-status-delete-button-label"></span>
-                            </button>
-                            <button id="viewsManagerStatusActionExport" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
-                              <span data-l10n-id="pdfjs-views-manager-pages-status-export-selected-button-label"></span>
-                            </button>
+                            <li>
+                              <button id="viewsManagerStatusActionCopy" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
+                                <span data-l10n-id="pdfjs-views-manager-pages-status-copy-button-label"></span>
+                              </button>
+                            </li>
+                            <li>
+                              <button id="viewsManagerStatusActionCut" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
+                                <span data-l10n-id="pdfjs-views-manager-pages-status-cut-button-label"></span>
+                              </button>
+                            </li>
+                            <li>
+                              <button id="viewsManagerStatusActionDelete" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
+                                <span data-l10n-id="pdfjs-views-manager-pages-status-delete-button-label"></span>
+                              </button>
+                            </li>
+                            <li>
+                              <button id="viewsManagerStatusActionSaveAs" class="noIcon" role="menuitem" type="button" tabindex="-1" disabled>
+                                <span data-l10n-id="pdfjs-views-manager-pages-status-save-as-button-label"></span>
+                              </button>
+                            </li>
                           </menu>
                         </div>
                       </div>
                       <div id="viewsManagerStatusUndo" class="hidden">
-                        <span id="viewsManagerStatusUndoLabel" class="viewsManagerStatusLabel"></span>
+                        <span class="viewsManagerStatusLabel" data-l10n-id="pdfjs-views-manager-status-undo-cut-label" data-l10n-args='{"count": 0}'></span>
                         <div>
                           <button id="viewsManagerStatusUndoButton" class="viewsManagerButton" type="button" tabindex="0">
                             <span data-l10n-id="pdfjs-views-manager-status-undo-button-label"></span>
@@ -238,7 +186,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                         </div>
                       </div>
                       <div id="viewsManagerStatusWarning" class="hidden">
-                        <span id="viewsManagerStatusWarningLabel" class="viewsManagerStatusLabel"></span>
+                        <span class="viewsManagerStatusLabel"></span>
                         <button
                           id="viewsManagerStatusWarningCloseButton"
                           class="toolbarButton viewsManagerButton viewsCloseButton"
@@ -250,7 +198,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                         </button>
                       </div>
                       <div id="viewsManagerStatusWaiting" class="hidden">
-                        <span id="viewsManagerStatusWaitingLabel" class="viewsManagerStatusLabel"></span>
+                        <span class="viewsManagerStatusLabel"></span>
                         <button
                           id="viewsManagerStatusWaitingCloseButton"
                           class="toolbarButton viewsManagerButton viewsCloseButton"
@@ -606,6 +554,13 @@ See https://github.com/adobe-type-tools/cmap-resources
                 <div id="editorModeSeparator" class="verticalToolbarSeparator"></div>
 
                 <div class="toolbarHorizontalGroup hiddenMediumView">
+                  <button id="printButton" class="toolbarButton" type="button" tabindex="0" data-l10n-id="pdfjs-print-button">
+                    <span data-l10n-id="pdfjs-print-button-label"></span>
+                  </button>
+
+                  <button id="downloadButton" class="toolbarButton" type="button" tabindex="0" data-l10n-id="pdfjs-save-button">
+                    <span data-l10n-id="pdfjs-save-button-label"></span>
+                  </button>
                 </div>
 
                 <div class="verticalToolbarSeparator hiddenMediumView"></div>
@@ -625,11 +580,9 @@ See https://github.com/adobe-type-tools/cmap-resources
                   </button>
                   <div id="secondaryToolbar" class="hidden doorHangerRight menu">
                     <div id="secondaryToolbarButtonContainer" class="menuContainer">
-                      <!--#if GENERIC-->
                       <button id="secondaryOpenFile" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-open-file-button">
                         <span data-l10n-id="pdfjs-open-file-button-label"></span>
                       </button>
-                      <!--#endif-->
 
                       <div class="visibleMediumView">
                         <button id="secondaryPrint" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-print-button">
@@ -640,14 +593,9 @@ See https://github.com/adobe-type-tools/cmap-resources
                           <span data-l10n-id="pdfjs-save-button-label"></span>
                         </button>
 
-                        <!--#if !GENERIC-->
-                        <!--            <div class="horizontalToolbarSeparator"></div>-->
-                        <!--#endif-->
                       </div>
 
-                      <!--#if GENERIC-->
                       <div class="horizontalToolbarSeparator"></div>
-                      <!--#endif-->
 
                       <button id="presentationMode" class="toolbarButton labeled" type="button" tabindex="0" data-l10n-id="pdfjs-presentation-mode-button">
                         <span data-l10n-id="pdfjs-presentation-mode-button-label"></span>
@@ -1109,7 +1057,7 @@ See https://github.com/adobe-type-tools/cmap-resources
               ></button>
             </div>
             <div id="addSignatureActionContainer" data-selected="type">
-              <div id="addSignatureTypeContainer" role="tabpanel" aria-labelledby="addSignatureTypeButton">
+              <div id="addSignatureTypeContainer" role="tabpanel" aria-labelledby="addSignatureTypeContainer">
                 <input id="addSignatureTypeInput" type="text" data-l10n-id="pdfjs-editor-add-signature-type-input" tabindex="0" />
               </div>
               <div id="addSignatureDrawContainer" role="tabpanel" aria-labelledby="addSignatureDrawButton" tabindex="-1">
@@ -1186,7 +1134,7 @@ See https://github.com/adobe-type-tools/cmap-resources
         </dialog>
 
         <dialog class="dialog signatureDialog" id="editSignatureDescriptionDialog" aria-labelledby="editSignatureDescriptionTitle">
-          <div class="mainContainer">
+          <div id="editSignatureDescriptionContainer" class="mainContainer">
             <div class="title">
               <span id="editSignatureDescriptionTitle" role="sectionhead" data-l10n-id="pdfjs-editor-edit-signature-dialog-title" tabindex="0"></span>
             </div>
@@ -1228,7 +1176,6 @@ See https://github.com/adobe-type-tools/cmap-resources
           </div>
         </dialog>
 
-        <!--#if !MOZCENTRAL-->
         <dialog id="printServiceDialog" style="min-width: 200px">
           <div class="row">
             <span data-l10n-id="pdfjs-print-progress-message"></span>
@@ -1241,10 +1188,6 @@ See https://github.com/adobe-type-tools/cmap-resources
             <button id="printCancel" class="dialogButton" type="button"><span data-l10n-id="pdfjs-print-progress-close-button"></span></button>
           </div>
         </dialog>
-        <!--#endif-->
-        <!--#if CHROME-->
-        <!--#include viewer-snippet-chrome-overlays.html-->
-        <!--#endif-->
       </div>
       <!-- dialogContainer -->
 
