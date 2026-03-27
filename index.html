@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Viewer PDF</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f0f0f0;
+    }
+
+    .topbar {
+      background: #222;
+      padding: 10px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .topbar button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      background: #ffffff;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <button onclick="goToPage(1)">Inizio</button>
+  <button onclick="goToPage(6)">Elisuperficie</button>
+  <button onclick="goToPage(13)">Autostrada A1</button>
+  <button onclick="goToPage(14)">Mappa Ospedali (Mo)</button>
+  <button onclick="goToPage(22)">Mappa Ospedali (Bo)</button>
+  <button onclick="goToPage(30)">Ospedali Spc</button>
+  <button onclick="goToPage(32)">Reparti H (Mo)</button>
+  <button onclick="goToPage(45)">Reparti H_(Bo)</button>
+  <button onclick="goToPage(76)">Reparti S_(Mo)</button>
+</div>
+
+<iframe id="viewer"></iframe>
+
+<script>
+  const viewerBase = "pdfjs/web/viewer.html";
+  const pdfFile = "/pdf-viewer/documento.pdf";
+
+  function goToPage(page) {
+    document.getElementById("viewer").src =
+      viewerBase + "?file=" + pdfFile +
+      "#page=" + page +
+      "&zoom=page-width";
+ }
+
+  goToPage(1);
+</script>
+
+</body>
+</html>
